@@ -3,7 +3,7 @@ import express from 'express';
 import nextApp from '@monorepo/client';
 import apolloServer from '@monorepo/graphql';
 
-const { PORT } = process.env;
+const PORT = process.env.PORT || 9090 ;
 
 async function main() {
   const app = express();
@@ -11,8 +11,7 @@ async function main() {
   await bootstrapApolloServer(app);
   await bootstrapClientApp(app);
 
-  app.listen(PORT, (err) => {
-    if (err) throw err;
+  app.listen(PORT, () => {
     console.log(`[ server ] ready on port ${PORT}`);
   });
 }
